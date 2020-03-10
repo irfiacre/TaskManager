@@ -23,3 +23,17 @@ export const signupValidateSchema = Joi.object({
     .pattern(/^[a-zA-Z0-9]{3,30}$/)
     .required()
 });
+
+
+export const signinValidateSchema = Joi.object({
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+    })
+    .required()
+    .error(new Error('Invalid Email')),
+
+  password: Joi.string()
+    .pattern(/^[a-zA-Z0-9]{3,30}$/)
+    .required(),
+});

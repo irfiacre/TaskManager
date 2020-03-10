@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS users(
   password VARCHAR(300) NOT NULL ,
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
+INSERT INTO users(email,firstname,lastname,password)VALUES('francoismugorozi@gmail.com','francois','mugorozi','$2b$10$K4EmRPE/zh/b6QxPQiVVaOtnq01okywVrxsJMFr8kL9L2qg24c5gS');
 `;
 
 const tables = async () => {
