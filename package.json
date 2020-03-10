@@ -29,6 +29,7 @@
     "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/register": "^7.8.3",
+    "@hapi/joi": "^17.1.0",
     "babel-eslint": "^10.0.3",
     "babel-node": "0.0.1-security",
     "bcrypt": "^3.0.8",
@@ -46,6 +47,7 @@
     "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
     "pg": "^7.18.1",
+    "regenerator-runtime": "^0.13.3",
     "validator": "^12.2.0"
   },
   "devDependencies": {
