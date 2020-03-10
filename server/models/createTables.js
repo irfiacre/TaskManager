@@ -1,7 +1,6 @@
 import pool from '../config/db_config';
 
 const tablesCreator = `
-DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE IF NOT EXISTS users(
   id SERIAL PRIMARY KEY,
   email VARCHAR(35) UNIQUE NOT NULL,
@@ -13,18 +12,20 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS tasks(
   id SERIAL PRIMARY KEY,
-  taskDescription VARCHAR(500) NULL,
-  scheduleDate TIMESTAMP NULL,
-  dueDate TIMESTAMP NULL,
+  title VARCHAR(200) NOT NULL,
+  description VARCHAR(500) NULL,
+  schedule_date TIMESTAMP NULL,
+  due_date TIMESTAMP NULL,
   status BOOLEAN DEFAULT FALSE,
-  createdOn TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  created_on TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );`;
 
 const tables = async () => {
   await pool.query(tablesCreator).then(() => {
     console.log('Tables Created');
     pool.end();
-  }).catch(() => {
+  }).catch((err) => {
+    console.log(err)
     process.exit(0);
   });
 };
