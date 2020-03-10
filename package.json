@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run createTables && babel-node server.js",
-    "test": "npm run testTables && nyc --reporter=html --reporter=text mocha --require @babel/register --timeout 5000 server/tests/ --exit",
+    "test": "npm run testTables && nyc --reporter=html --reporter=text mocha --require @babel/register --timeout 5000 ./server/tests/*.js --exit",
     "dev": "npm run createTables && nodemon --exec babel-node server.js",
     "createTables": "babel-node ./server/models/createTables.js",
     "testTables": "  babel-node ./server/models/testTables",
