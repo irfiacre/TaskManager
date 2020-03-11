@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import dontenv from 'dotenv';
 import authRouter from './routes/authRoute';
+import tasksRouter from './routes/tasksRoute';
 
 dontenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRouter);
+app.use('/api', tasksRouter);
 
 app.use((req, res) =>
   res.status(404).json({
