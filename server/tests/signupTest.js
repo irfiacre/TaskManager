@@ -46,7 +46,7 @@ describe('Test POST /api/auth/signup/', () => {
     const newUser = {
       firstName: 'Francois',
       lastName: 'Mugorozi',
-      email: 'kaniuse@gmail.com',
+      email: 'kan@gmail.com',
       password: 'pass123',
     };
 
@@ -64,7 +64,7 @@ describe('Test POST /api/auth/signup/', () => {
     const newUser = {
       firstName: 'Francois',
       lastName: 'Mugorozi',
-      email: 'kaniuse@gmail.com',
+      email: 'kan@gmail.com',
       password: 'pass123',
     };
 
