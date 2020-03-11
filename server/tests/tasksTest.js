@@ -9,7 +9,7 @@ dotenv.config();
 
 chai.use(chaiHttp);
 const { expect } = chai;
-
+let id;
 describe('Tasks: POST', () => {
   it('should create a new Task in storage', (done) => {
     // Use infinite token (does not expire)
@@ -27,6 +27,8 @@ describe('Tasks: POST', () => {
       .set('Authorization', token)
       .send(newTask)
       .end((err, res) => {
+        console.log(res.body.data.id)
+        id = res.body.data.id;
         expect(res.statusCode).to.equal(201);
         done();
       });
@@ -125,3 +127,78 @@ describe('Tasks: DELETE', () => {
       });
   });
 });
+
+describe('View Task',()=>{
+  it('should return id must be a number', (done) => {
+
+    const token = process.env.USER_TOKEN;
+
+    chai.request(app)
+        .get('/api/v1/task?taskid=mnb')
+        .set('Authorization', token)
+        .end(function(err, res){
+          expect(res.statusCode).to.equal(400)
+          done();
+      });
+  });
+
+  it('should create a new Task in storage', (done) => {
+    const token = process.env.USER_TOKEN;
+
+    const newTask = {
+      title: faker.lorem.words(3),
+      description: 'Testing: new task created in the database...' + faker.lorem.sentence(7),
+    };
+
+    chai
+      .request(app)
+      .post('/api/v1/tasks')
+      .set('Authorization', token)
+      .send(newTask)
+      .end((err, res) => {
+        console.log(res.body.data.id)
+        id = res.body.data.id;
+        expect(res.statusCode).to.equal(201);
+        done();
+      });
+  });
+
+  it('should task Not found', (done) => {
+
+    const token = process.env.USER_TOKEN;
+
+    chai.request(app)
+        .get(`/api/v1/task?taskid=890`)
+        .set('Authorization', token)
+        .end(function(err, res){
+          expect(res.statusCode).to.equal(404)
+          done();
+      });
+  });
+
+  it('should return View successful', (done) => {
+
+    const token = process.env.USER_TOKEN;
+
+    chai.request(app)
+        .get(`/api/v1/task?taskid=${id}`)
+        .set('Authorization', token)
+        .end(function(err, res){
+          expect(res.statusCode).to.equal(200)
+          done();
+      });
+  });
+
+  it('should return View successful', (done) => {
+
+    const token = process.env.USER_TOKEN;
+
+    chai.request(app)
+        .get('/api/v1/task')
+        .set('Authorization', token)
+        .end(function(err, res){
+          expect(res.statusCode).to.equal(200)
+          done();
+      });
+  });
+})

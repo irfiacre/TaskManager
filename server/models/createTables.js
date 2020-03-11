@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS tasks(
   id SERIAL PRIMARY KEY,
   title VARCHAR(200) NOT NULL,
-  description VARCHAR(500) NULL,
-  schedule_date TIMESTAMP NULL,
-  due_date TIMESTAMP NULL,
+  description VARCHAR(500),
+  schedule_date TIMESTAMP,
+  due_date TIMESTAMP,
   status BOOLEAN DEFAULT FALSE,
   created_on TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );`;
