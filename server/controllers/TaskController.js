@@ -69,4 +69,38 @@ export default class TaskController {
       
     } catch (error) {}
   }
+
+  static async View(req,res){
+    let result;
+    let queryTaskReadAll;
+    try{
+    if(req.query.taskid){
+
+      if(isNaN(req.query.taskid)){
+        return res.status(400).json({
+          status:400,
+          message:"Task Id shoud Be an Integer"
+        })
+      }
+
+      queryTaskReadAll = `SELECT * FROM tasks where id='${req.query.taskid}';`;
+      result = await pool.query(queryTaskReadAll);
+
+    }else{
+
+      queryTaskReadAll = `SELECT * FROM tasks;`;
+      result = await pool.query(queryTaskReadAll)
+    }      
+    if(!result.rows[0]){
+      return res.status(404).json({
+        status: 404,
+        error:"No Task Found"
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: result.rows,
+    });
+    }catch(err){}
+  }
 }

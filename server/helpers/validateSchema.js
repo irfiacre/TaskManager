@@ -41,9 +41,11 @@ export const createTaskValidateSchema = Joi.object({
   title: Joi.string()
     .min(2)
     .max(100)
-    .required(),
+    .required()
+    .error(new Error('the title is required')),
 
   description: Joi.string()
     .min(2)
-    .required(),
+    .required()
+    .error(new Error('the description is required')),
 });
