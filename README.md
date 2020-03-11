@@ -8,7 +8,8 @@
 
 #### All of the projects endpoints are hosted on [Heroku](https://taskamanager.herokuapp.com/)
 
-> For better testing, please make requests using [Postman](https://www.getpostman.com/)
+> For better testing, please make requests using [Postman](https://www.getpostman.com/) 
+  ```on Port localhost:7000/url```
 
 ### Features
 
@@ -70,5 +71,14 @@
 
 ### Authors
 
-> Warriorz Team:
-> [MUGOROZI Francois](https://github.com/Francois-MUGOROZI) >[URIMUBENSHI Daniel](https://github.com/benshidanny11) >[KABUNDEGE Christophe](https://github.com/kabundege) >[MWUMVANEZA Arnold](https://github.com/fordarnold) >[IRADUKUNDA Allelua Fiacre](https://github.com/irfiacre) `(Team Lead)`
+># Warriorz Team
+>
+> [MUGOROZI Francois](https://github.com/Francois-MUGOROZI)
+>
+>[URIMUBENSHI Daniel](https://github.com/benshidanny11) 
+>
+>[KABUNDEGE Christophe](https://github.com/kabundege) 
+>
+>[MWUMVANEZA Arnold](https://github.com/fordarnold) 
+>
+>[IRADUKUNDA Allelua Fiacre](https://github.com/irfiacre)  `#Team Lead`
