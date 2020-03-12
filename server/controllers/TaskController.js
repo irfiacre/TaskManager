@@ -21,15 +21,15 @@ export default class TaskController {
     static async create(req, res) {
 
         // Get resource (Task) data passed in the request body
-        const { title, description, scheduleDate, dueDate, status } = req.body;
+        const { title, description, scheduleDate, dueDate } = req.body;
 
         // Setup SQL query
-        let queryTaskInsert = `INSERT INTO tasks (title, description, schedule_date, due_date, status) 
-    VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+        let queryTaskInsert = `INSERT INTO tasks (title, description, schedule_date, due_date) 
+    VALUES ($1, $2, $3, $4) RETURNING *;`;
 
         try {
             // Execute the SQL query
-            const { rows } = await pool.query(queryTaskInsert, [title, description, scheduleDate, dueDate, status]);
+            const { rows } = await pool.query(queryTaskInsert, [title, description, scheduleDate, dueDate]);
 
             return res.status(201).json({
                 status: 201,
