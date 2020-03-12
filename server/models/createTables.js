@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS tasks(
   description VARCHAR(500),
   schedule_date TIMESTAMP,
   due_date TIMESTAMP,
-  status BOOLEAN DEFAULT FALSE,
+  status VARCHAR(30) DEFAULT 'pending',
   created_on TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );`;
 
