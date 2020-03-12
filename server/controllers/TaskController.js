@@ -22,14 +22,15 @@ export default class TaskController {
 
         // Get resource (Task) data passed in the request body
         const { title, description, scheduleDate, dueDate } = req.body;
+        const ownerEmail = req.user.email;
 
         // Setup SQL query
-        let queryTaskInsert = `INSERT INTO tasks (title, description, schedule_date, due_date) 
-    VALUES ($1, $2, $3, $4) RETURNING *;`;
+        let queryTaskInsert = `INSERT INTO tasks (title, description, owner_email, schedule_date, due_date) 
+    VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
 
         try {
             // Execute the SQL query
-            const { rows } = await pool.query(queryTaskInsert, [title, description, scheduleDate, dueDate]);
+            const { rows } = await pool.query(queryTaskInsert, [title, description, ownerEmail, scheduleDate, dueDate]);
 
             return res.status(201).json({
                 status: 201,

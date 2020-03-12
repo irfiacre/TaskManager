@@ -10,10 +10,12 @@ CREATE TABLE IF NOT EXISTS users(
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
+DROP TABLE IF EXISTS tasks CASCADE;
 CREATE TABLE IF NOT EXISTS tasks(
   id SERIAL PRIMARY KEY,
   title VARCHAR(200) NOT NULL,
   description VARCHAR(500),
+  owner_email VARCHAR(200) NOT NULL,
   schedule_date TIMESTAMP,
   due_date TIMESTAMP,
   status VARCHAR(30) DEFAULT 'pending',
