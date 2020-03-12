@@ -29,7 +29,7 @@
 | POST        | /auth/signin                  | allows the user to sign in                     |
 | POST        | /api/v1/tasks                 | allows the User to create a task               |
 | GET         | /api/v1/tasks                 | allows the User to view all tasks created      |
-| GET         | /api/v1/tasks/< task-id >     | allows the User to view a specific task        |
+| GET         | /api/v1/tasks ? taskid =  `taskId`      | allows the User to view a specific task        |
 | PATCH       | /api/v1/tasks/< task-id >/end | allows the User to update the status of a task |
 | PATCH       | /api/v1/tasks/< task-id >     | allows the User to update the content          |
 | PATCH       | api/v1/tasks/< task-id >      | allows a user to DELETE a task                 |

@@ -40,7 +40,6 @@ export default class TaskController {
 
         } catch (error) {}
     }
-
     static async delete(req, res) {
         // Setup SQL query
         let queryTaskDelete = `DELETE FROM tasks WHERE id = $1;`;
@@ -70,11 +69,17 @@ export default class TaskController {
 
         } catch (error) {}
     }
-
     static async View(req, res) {
-        let result;
-        let queryTaskReadAll;
         try {
+            const queryTaskReadAll = `SELECT * FROM tasks where owner_email='${req.user.email}';`;
+            const { rows } = await pool.query(queryTaskReadAll)
+
+            if (!rows[0]) {
+                return res.status(404).json({
+                    status: 404,
+                    error: "No Task Found"
+                });
+            }
             if (req.query.taskid) {
 
                 if (isNaN(req.query.taskid)) {
@@ -83,25 +88,27 @@ export default class TaskController {
                         message: "Task Id shoud Be an Integer"
                     })
                 }
-
-                queryTaskReadAll = `SELECT * FROM tasks where id='${req.query.taskid}';`;
-                result = await pool.query(queryTaskReadAll);
+                const data = rows.find(el=>el.id == req.query.taskid)
+                
+                if(!data){
+                    return res.status(404).json({
+                        status:404,
+                        error:"Task Not Found"
+                    })
+                }else{
+                    return res.status(200).json({
+                        status:200,
+                        message:"fetch sucessful",
+                        data:data
+                    })
+                }
 
             } else {
-
-                queryTaskReadAll = `SELECT * FROM tasks;`;
-                result = await pool.query(queryTaskReadAll)
-            }
-            if (!result.rows[0]) {
-                return res.status(404).json({
-                    status: 404,
-                    error: "No Task Found"
+                return res.status(200).json({
+                    status: 200,
+                    data: rows,
                 });
             }
-            return res.status(200).json({
-                status: 200,
-                data: result.rows,
-            });
         } catch (err) {}
     }
     static async update(req, res) {
