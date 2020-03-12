@@ -80,20 +80,19 @@ export const signin = async (req, res) => {
   const token = jwt.sign({
     id: passwordFound.id,
     email: passwordFound.email,
-    fullName: `${user.firstName}  ${user.lastName}`,
+    fullName: `${user.firstName} ${user.lastName}`,
     is_admin: passwordFound.is_admin,
-  }, process.env.JWT_KEY);
+  }, process.env.JWT_KEY, {
+    expiresIn: '24h',
+  });
 
   res.status(200).json({
     status: 200,
     data: {
       token,
-      id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      type: passwordFound.type,
-      is_admin: passwordFound.is_admin,
     },
   });
 };
