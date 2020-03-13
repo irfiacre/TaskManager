@@ -2,18 +2,20 @@ import { signupValidateSchema, signinValidateSchema, createTaskValidateSchema } 
 
 // validate signup
 export const validateSignupData = (req, res, next) => {
-  const { firstName, lastName, email, password } = req.body;
+  const {
+    firstName, lastName, email, password,
+  } = req.body;
   const { error } = signupValidateSchema.validate({
     firstName,
     lastName,
     email,
-    password
+    password,
   });
 
   if (error) {
     res.status(400).json({
       status: res.statusCode,
-      error: error.message
+      error: error.message,
     });
   } else next();
 };
@@ -27,9 +29,17 @@ export const validateSignin = (req, res, next) => {
   });
 
   if (error) {
+    if (error.message.includes('email')) {
+      return res.status(400).json({
+        status: 400,
+        error: `${error.message.replace('/', '').replace(/"/g, '')},` + ' example: xxx@yyy.zzz ',
+        path: error.details[0].path[0],
+      });
+    }
     res.status(400).json({
       status: res.statusCode,
-      error: error.message
+      error: error.message.replace('/', '').replace(/"/g, ''),
+      path: error.details[0].path[0],
     });
   } else next();
 };
@@ -44,7 +54,7 @@ export const validateCreateTask = (req, res, next) => {
   if (error) {
     res.status(400).json({
       status: res.statusCode,
-      error: error.message
+      error: error.message,
     });
   } else next();
 };
