@@ -48,7 +48,7 @@
     "nyc": "^15.0.0",
     "pg": "^7.18.1",
     "regenerator-runtime": "^0.13.3",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.9",
